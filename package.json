@@ -1,0 +1,17 @@
+{
+  "name": "iotest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "iotest.js",
+  "scripts": {
+    "start": "sudo node ./iotest.js"
+  },
+  "author": "LM",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "raspi": "^5.0.2",
+    "raspi-io": "^8.1.0",
+    "socket.io": "^2.1.0"
+  }
+}
