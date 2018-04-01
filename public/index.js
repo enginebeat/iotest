@@ -2,34 +2,24 @@
 
 //get the server IP Address for this socket
 var serverIPAddress = location.hostname;
+var serverPort = location.port
 console.log(serverIPAddress);
-var socket = io.connect('http://' + serverIPAddress + ':' + 9000);
+console.log(serverPort);
+var socket = io.connect('http://' + serverIPAddress + ':' + serverPort);
 
 
 
 
-var toggleBtn = document.getElementById('toggle_Btn');
-console.log(toggleBtn);
-toggleBtn.addEventListener('click', ()=>{
-    var state = 0;
-    console.log(toggleBtn.value);
-    switch(toggleBtn.value){
-        case 'On':
-            state = 1;
-            console.log('turning on');
-            toggleBtn.value = 'Off';
-            break;
-        case 'Off':
-            state = 0;
-            console.log('turning off');
-            toggleBtn.value = 'On'
-            break;
-    };
-    
-    //if(toggleBtn.value === 'On'){
-        
-    //} else{
-        
-    //};
-    socket.emit('onoffButton', {value: state});
+var onButton = document.getElementById('on_Btn');
+var offButton = document.getElementById('off_Btn');
+var pinNum = document.getElementById('pin_num');
+
+onButton.addEventListener('click', ()=>{
+    pinValue = pinNum.value;
+    socket.emit('onButton', {pinNum: pinValue});
+});
+
+offButton.addEventListener('click', ()=>{
+    pinValue = pinNum.value;
+    socket.emit('offButton', {pinNum: pinValue});
 });
