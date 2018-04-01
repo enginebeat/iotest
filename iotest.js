@@ -23,29 +23,34 @@ var ServerController = (()=>{
 
     var socket = require("socket.io");
 
-    var server = app.listen(9000, ()=>{
+    var server = app.listen(9000,'0.0.0.0', ()=>{
         console.log('server started on port 9000')
 
     });
 
+    var os = require( 'os' );
+
+    var networkInterfaces = os.networkInterfaces( );
+
+    console.log( networkInterfaces );
 
     raspi.init(() => {
-        output = new gpio.DigitalOutput('P1-7');
-        //output.write(1);
-    });
+        output = new gpio.DigitalOutput('P1-11');
+        //Socket setup
+        var io = socket(server);
 
-    //Socket setup
-    var io = socket(server);
+        io.on('connection', (socket)=>{
+            console.log('new connection', socket.id);
+            //Receive values from the client
+            socket.on('onoffButton', (data)=>{
+                console.log(data.value);
+                output.write(data.value);
+                
 
-    io.on('connection', (socket)=>{
-        console.log('new connection', socket.id);
-        //Receive values from the client
-        socket.on('onoffButton', (data)=>{
-            console.log(data.value);
-            output.write(Number(data.value));
-
+            });
         });
     });
 
+    
 
 })();

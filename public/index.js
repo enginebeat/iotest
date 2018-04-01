@@ -1,5 +1,5 @@
 //Make connection
-var socket = io.connect('http://localhost:9000');
+var socket = io.connect('http://192.168.0.51:9000');
 
 
 
