@@ -1,5 +1,10 @@
 //Make connection
-var socket = io.connect('http://192.168.0.51:9000');
+
+//get the server IP Address for this socket
+var serverIPAddress = location.hostname;
+console.log(serverIPAddress);
+var socket = io.connect('http://' + serverIPAddress + ':' + 9000);
+
 
 
 

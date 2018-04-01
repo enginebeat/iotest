@@ -33,6 +33,7 @@ var ServerController = (()=>{
     var networkInterfaces = os.networkInterfaces( );
 
     console.log( networkInterfaces );
+    
 
     raspi.init(() => {
         output = new gpio.DigitalOutput('P1-11');
