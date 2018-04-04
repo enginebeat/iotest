@@ -13,6 +13,7 @@ var socket = io.connect('http://' + serverIPAddress + ':' + serverPort);
 var onButton = document.getElementById('on_Btn');
 var offButton = document.getElementById('off_Btn');
 var pinNum = document.getElementById('pin_num');
+var command = document.getElementById('command_label');
 
 onButton.addEventListener('click', ()=>{
     pinValue = pinNum.value;
@@ -22,4 +23,8 @@ onButton.addEventListener('click', ()=>{
 offButton.addEventListener('click', ()=>{
     pinValue = pinNum.value;
     socket.emit('offButton', {pinNum: pinValue});
+});
+
+socket.on('command', (data)=>{
+    command.innerHTML = data.command;
 });
